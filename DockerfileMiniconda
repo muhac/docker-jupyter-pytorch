@@ -1,0 +1,23 @@
+# Use CUDA 11.7
+FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 as base
+SHELL ["/bin/bash", "-c"]
+ENV SHELL=/bin/bash
+
+# Install basic packages
+RUN apt update --fix-missing && \
+    apt install bzip2 ca-certificates curl wget git vim -y && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+
+# Install Miniconda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/anaconda.sh && \
+    bash ~/anaconda.sh -b -p $HOME/anaconda && rm ~/anaconda.sh && \
+    eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda init
+
+# Export paths for CUDA and cuDNN
+RUN echo $'\n\
+    export CUDA_HOME=/usr/local/cuda \n\
+    export PATH=/usr/local/cuda/bin:$PATH \n\
+    export CPATH=/usr/local/cuda/include:/usr/include:$CPATH \n\
+    export LIBRARY_PATH=/usr/local/cuda/lib64:$LIBRARY_PATH \n\
+    export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH \n\
+' >> /root/.bashrc
