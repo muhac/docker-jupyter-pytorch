@@ -4,7 +4,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches: ['main']
+    branches: ['cuda_12.1-torch_2.2_nightly']
 
 jobs:
   miniconda:
@@ -47,7 +47,7 @@ jobs:
         with:
           context: .
           file: ./DockerfileMiniconda
-          tags: muhac/conda-cuda
+          tags: muhac/conda-cuda:12.1
           push: true
 
       - name: Check Free Space Remaining
@@ -93,7 +93,7 @@ jobs:
         with:
           context: .
           file: ./DockerfileAnaconda
-          tags: muhac/conda-cuda:anaconda
+          tags: muhac/conda-cuda:12.1-anaconda
           push: true
 
       - name: Check Free Space Remaining
@@ -139,7 +139,7 @@ jobs:
         with:
           context: .
           file: ./DockerfilePyTorch
-          tags: muhac/conda-cuda:torch
+          tags: muhac/conda-cuda:12.1-torch_2.2_nightly
           push: true
 
       - name: Check Free Space Remaining
