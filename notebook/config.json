@@ -1,6 +1,9 @@
 {
   "NotebookApp": {
     "password": "",
-    "token": ""
+    "token": "",
+    "nbserver_extensions": {
+      "jupyter_nbextensions_configurator": true
+    }
   }
 }

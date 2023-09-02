@@ -28,6 +28,17 @@ RUN echo $'\n\
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH \n\
 ' >> /root/.bashrc
 
+# Setup Jupyter Notebook Themes
+RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
+    conda activate torch && \
+    conda install -c conda-forge jupyterthemes -y && conda clean -a && \
+    pip install jupyter_contrib_nbextensions && pip cache purge && \
+    jupyter contrib nbextension install --user && \
+    jt -t monokai -f firacode -fs 11 -nfs 13 -tfs 13 -dfs 10 -ofs 11 -T
+COPY notebook/config_notebook.json /root/.jupyter/nbconfig/notebook.json
+COPY notebook/config_common.json   /root/.jupyter/nbconfig/common.json
+COPY notebook/config_tree.json     /root/.jupyter/nbconfig/tree.json
+
 # Setup Jupyter Notebook
 RUN echo "conda activate torch" >> /root/.bashrc && \
     mkdir -p /work/project && \

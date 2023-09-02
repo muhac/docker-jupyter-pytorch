@@ -1,0 +1,49 @@
+{
+  "Cell": {
+    "cm_config": {
+      "lineNumbers": false
+    }
+  },
+  "load_extensions": {
+    "nbextensions_configurator/config_menu/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "comment-uncomment/main": true,
+    "execute_time/ExecuteTime": true,
+    "export_embedded/main": true,
+    "addbefore/main": true,
+    "execution_dependencies/execution_dependencies": true,
+    "snippets/main": false,
+    "toc2/main": false,
+    "varInspector/main": true,
+    "code_prettify/autopep8": false,
+    "hinterland/hinterland": true,
+    "printview/main": true,
+    "snippets_menu/main": true,
+    "table_beautifier/main": true,
+    "autosavetime/main": true,
+    "code_prettify/code_prettify": true,
+    "equation-numbering/main": true,
+    "collapsible_headings/main": false,
+    "spellchecker/main": false,
+    "codefolding/main": false,
+    "python-markdown/main": true
+  },
+  "comment_uncomment_keybinding": "meta-/",
+  "ExecuteTime": {
+    "display_in_utc": true,
+    "display_right_aligned": true,
+    "display_absolute_timings": true,
+    "highlight": {
+      "color": "#87b620"
+    }
+  },
+  "autosavetime_set_starting_interval": true,
+  "toc2": {
+    "number_sections": false,
+    "toc_cell": false,
+    "toc_window_display": false,
+    "sideBar": false
+  },
+  "autosavetime_starting_interval": "1",
+  "autosavetime_show_selector": false
+}
