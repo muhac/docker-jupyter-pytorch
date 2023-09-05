@@ -4,7 +4,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches: ['main']
+    branches: ['cuda_11.2-tf_2.13.0']
 
 jobs:
   miniconda:
@@ -47,7 +47,7 @@ jobs:
         with:
           context: .
           file: ./DockerfileMiniconda
-          tags: muhac/conda-cuda
+          tags: muhac/conda-cuda:11.2
           push: true
 
       - name: Check Free Space Remaining
@@ -93,14 +93,14 @@ jobs:
         with:
           context: .
           file: ./DockerfileAnaconda
-          tags: muhac/conda-cuda:anaconda
+          tags: muhac/conda-cuda:11.2-anaconda
           push: true
 
       - name: Check Free Space Remaining
         run: df -Th
 
-  pytorch:
-    name: PyTorch
+  tensorflow:
+    name: TensorFlow
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the Repo
@@ -138,8 +138,8 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./DockerfilePyTorch
-          tags: muhac/conda-cuda:torch
+          file: ./DockerfileTensorFlow
+          tags: muhac/conda-cuda:11.2-tf_2.13.0
           push: true
 
       - name: Check Free Space Remaining
