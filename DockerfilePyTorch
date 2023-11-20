@@ -1,5 +1,5 @@
-# Use CUDA 11.7
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 as base
+# Use CUDA 11.8
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 
@@ -13,11 +13,10 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     bash ~/anaconda.sh -b -p $HOME/anaconda && rm ~/anaconda.sh && \
     eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda init
 
-# Install Pytorch 2.0.1 on Anaconda
+# Install Pytorch 2.1.1 on Anaconda
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n torch python=3.10 anaconda -y && conda clean -a && conda activate torch && \
-    conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.7 -c pytorch -c nvidia && \
-    conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia && conda clean -a
+    conda create -n torch python=3.11 anaconda -y && conda clean -a && conda activate torch && \
+    conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia && conda clean -a
 
 # Export paths for CUDA and cuDNN
 RUN echo $'\n\
