@@ -8,9 +8,9 @@ This docker file is used for Ubuntu 22.04 LTS, CUDA version 11.8. You may change
 
 More Docker tags are in other Git branches.
 
-- `11.8`: CUDA 11.8, Miniconda installed
-- `11.8-anaconda`: CUDA 11.8, Anaconda 23.07 installed
-- `11.8-torch_2.1.1`: CUDA 11.8, Anaconda with PyTorch 2.1.1
+- `latest`, alias `11.8`: CUDA 11.8, Miniconda installed
+- `anaconda`, alias `11.8-anaconda`: CUDA 11.8, Anaconda 23.07 installed
+- `torch`, alias `11.8-torch_2.1.1`: CUDA 11.8, Anaconda with PyTorch 2.1.1
 
 ## Install & Usage
 
@@ -24,7 +24,7 @@ docker run --detach \
     --gpus all \
     -p 8888:8888 \
     -v project:/work/project \
-    muhac/conda-cuda:11.8-torch_2.1.1
+    muhac/conda-cuda:torch
 ```
 
 You can use [this notebook](notebook/PyTorchGPU.ipynb) to check your PyTorch GPU environment.
