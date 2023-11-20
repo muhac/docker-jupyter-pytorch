@@ -14,7 +14,7 @@ More Docker tags are in other Git branches.
 
 ## Install & Usage
 
-The images with Anaconda automatically run a jupyter notebook on port `8888`. Working directory: `/work`
+The images with Anaconda automatically run a jupyter notebook on port `8888`. Working directory: `/work/project`.
 
 ```bash
 docker run --detach \
@@ -24,7 +24,7 @@ docker run --detach \
     --gpus all \
     -p 8888:8888 \
     -v project:/work/project \
-    muhac/conda-cuda:torch
+    muhac/conda-cuda:11.6-torch_1.13.1
 ```
 
 You can use [this notebook](notebook/PyTorchGPU.ipynb) to check your PyTorch GPU environment.
