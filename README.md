@@ -10,11 +10,11 @@ More Docker tags are in other Git branches.
 
 - `12.1`: CUDA 12.1, Miniconda installed
 - `12.1-anaconda`: CUDA 12.1, Anaconda 23.07 installed
-- `12.1-torch_2.1.1`: CUDA 12.1, Anaconda with PyTorch 2.1.1
+- `12.1-torch_2.2.1`: CUDA 12.1, Anaconda with PyTorch 2.2.1
 
 ## Install & Usage
 
-The images with Anaconda automatically run a jupyter notebook on port `8888`. Working directory: `/work/project`.
+The images with Anaconda automatically run a jupyter notebook on port `8888`. Working directory: `/work/`.
 
 ```bash
 docker run --detach \
@@ -23,8 +23,8 @@ docker run --detach \
     --runtime=nvidia \
     --gpus all \
     -p 8888:8888 \
-    -v project:/work/project \
-    muhac/conda-cuda:12.1-torch_2.1.1
+    -v project:/work \
+    muhac/conda-cuda:12.1-torch_2.2.1
 ```
 
 You can use [this notebook](notebook/PyTorchGPU.ipynb) to check your PyTorch GPU environment.
