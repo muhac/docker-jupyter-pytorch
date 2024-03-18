@@ -12,7 +12,7 @@ More Docker tags are in other Git branches.
 
 ## Install & Usage
 
-The images with Anaconda automatically run a jupyter notebook on port `8888`. Working directory: `/work/project`.
+The images with Anaconda automatically run a jupyter notebook on port `8888`. Working directory: `/work/`.
 
 ```bash
 docker run --detach \

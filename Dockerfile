@@ -15,10 +15,10 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     bash ~/anaconda.sh -b -p $HOME/anaconda && rm ~/anaconda.sh && \
     eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda init
 
-# Install Pytorch 2.1.1 on Anaconda
+# Install Pytorch 2.2.1 on Anaconda
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
     conda create -n torch python=3.11 anaconda -y && conda clean -a && conda activate torch && \
-    conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia && conda clean -a
+    conda install pytorch=2.2.1 torchvision=0.17.1 torchaudio=2.2.1 pytorch-cuda=12.1 -c pytorch -c nvidia && conda clean -a
 
 # Export paths for CUDA and cuDNN
 RUN echo $'\n\
@@ -32,13 +32,10 @@ RUN echo $'\n\
 # Setup Jupyter Notebook Themes
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
     conda activate torch && \
-    conda install -c conda-forge jupyterthemes -y && conda clean -a && \
-    pip install jupyter_contrib_nbextensions nbconvert pyppeteer && pip cache purge && \
-    jupyter contrib nbextension install --user && \
-    jt -t monokai -f firacode -fs 11 -nfs 13 -tfs 13 -dfs 10 -ofs 11 -T
-COPY notebook/config_notebook.json /root/.jupyter/nbconfig/notebook.json
-COPY notebook/config_common.json   /root/.jupyter/nbconfig/common.json
-COPY notebook/config_tree.json     /root/.jupyter/nbconfig/tree.json
+    conda install -c conda-forge jupyterlab_code_formatter jupyterlab_execute_time && \
+    conda install -c conda-forge jupyterlab-lsp python-lsp-server r-languageserver && \
+    pip install jupyterlab-spellchecker lckr_jupyterlab_variableinspector && \
+    conda clean -a && pip cache purge
 
 # Setup Jupyter Notebook
 RUN echo "conda activate torch" >> /root/.bashrc && \

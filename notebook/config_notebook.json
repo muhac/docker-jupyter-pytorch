@@ -44,6 +44,9 @@
     "toc_window_display": false,
     "sideBar": false
   },
+  "hinterland": {
+    "hint_delay": "1000"
+  },
   "autosavetime_starting_interval": "1",
   "autosavetime_show_selector": false
 }

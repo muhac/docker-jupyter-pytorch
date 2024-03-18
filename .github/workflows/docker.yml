@@ -18,12 +18,6 @@ jobs:
         uses: jlumbroso/free-disk-space@main
         with:
           tool-cache: false
-          android: false
-          dotnet: false
-          haskell: false
-          large-packages: false
-          docker-images: true
-          swap-storage: false
 
       - name: Check Free Space
         run: |
