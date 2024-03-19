@@ -4,7 +4,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches: ['customized_notebook']
+    branches: ['customized_3']
 
 jobs:
   pytorch:
@@ -41,7 +41,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          tags: muhac/conda-cuda:customized_notebook
+          tags: muhac/conda-cuda:customized_3
           push: true
 
       - name: Check Free Space Remaining

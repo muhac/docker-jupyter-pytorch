@@ -8,7 +8,7 @@ This docker file is used for Ubuntu 22.04 LTS, CUDA version 12.1. You may change
 
 More Docker tags are in other Git branches.
 
-- `customized_notebook`: CUDA 12.1, Anaconda with PyTorch 2.1.1 installed, customized jupyter notebook.
+- `customized_3`: CUDA 12.1, Anaconda with PyTorch 2.2.1 installed, customized jupyter notebook.
 
 ## Install & Usage
 
@@ -22,7 +22,7 @@ docker run --detach \
     --gpus all \
     -p 8888:8888 \
     -v project:/work/project \
-    muhac/conda-cuda:customized_notebook
+    muhac/conda-cuda:customized_3
 ```
 
 You can use [this notebook](notebook/PyTorchGPU.ipynb) to check your PyTorch GPU environment.

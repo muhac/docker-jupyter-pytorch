@@ -35,6 +35,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
     conda install -c conda-forge jupyterlab_code_formatter jupyterlab_execute_time && \
     conda install -c conda-forge jupyterlab-lsp python-lsp-server r-languageserver && \
     pip install jupyterlab-spellchecker lckr_jupyterlab_variableinspector && \
+    conda install ipywidgets=7.7.5 transformers && \
     conda clean -a && pip cache purge
 
 # Setup Jupyter Notebook
