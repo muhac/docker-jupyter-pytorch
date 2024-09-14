@@ -1,6 +1,6 @@
 # https://github.com/marketplace/actions/build-and-push-docker-images
 
-name: Publish Docker Image (latest)
+name: Publish Docker Image
 
 on:
   push:

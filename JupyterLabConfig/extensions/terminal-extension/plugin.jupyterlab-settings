@@ -1,0 +1,18 @@
+{
+    // Terminal
+    // @jupyterlab/terminal-extension:plugin
+    // Terminal settings.
+    // *************************************
+
+    "fontFamily": "\"Monaco Fira Nerd\", \"Cascadia Code\", Consolas, monospace",
+    "fontSize": 13,
+    "lineHeight": 1.1,
+    "theme": "dark",
+    "screenReaderMode": false,
+    "scrollback": 1000,
+    "shutdownOnClose": false,
+    "closeOnExit": true,
+    "pasteWithCtrlV": true,
+    "macOptionIsMeta": false,
+    "cursorBlink": true
+}

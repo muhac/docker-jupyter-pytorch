@@ -1,0 +1,59 @@
+{
+    // Notebook
+    // @jupyterlab/notebook-extension:tracker
+    // Notebook settings.
+    // **************************************
+
+    "accessKernelHistory": false,
+    "autoStartDefaultKernel": true,
+    "codeCellConfig": {
+        "autoClosingBrackets": true,
+        "highlightTrailingWhitespace": true,
+        "highlightWhitespace": true,
+        "lineNumbers": true,
+        "lineWrap": false,
+        "customStyles": {
+            "fontFamily": "\"Monaco Fira Nerd\", \"Cascadia Code\", Consolas, monospace",
+            "fontSize": 13,
+            "lineHeight": 1.1
+        }
+    },
+    "defaultCell": "code",
+    "documentWideUndoRedo": false,
+    "enableKernelInitNotification": false,
+    "inputHistoryScope": "global",
+    "kernelShutdown": false,
+    "kernelStatus": {
+        "showOnStatusBar": true,
+        "showProgress": true
+    },
+    "markdownCellConfig": {
+        "autoClosingBrackets": true,
+        "lineNumbers": false,
+        "matchBrackets": false,
+        "customStyles": {
+            "fontFamily": "Arial, sans-serif",
+            "fontSize": 14,
+            "lineHeight": 1.1
+        }
+    },
+    "maxNumberOutputs": 50,
+    "overscanCount": 1,
+    "rawCellConfig": {
+        "customStyles": {
+            "fontFamily": "\"Monaco Fira Nerd\", \"Cascadia Code\", Consolas, monospace",
+            "fontSize": 13,
+            "lineHeight": 1.1
+        }
+    },
+    "recordTiming": true,
+    "renderingLayout": "default",
+    "scrollHeadingToTop": true,
+    "scrollPastEnd": true,
+    "showEditorForReadOnlyMarkdown": true,
+    "showHiddenCellsButton": true,
+    "sideBySideLeftMarginOverride": "10px",
+    "sideBySideOutputRatio": 1,
+    "sideBySideRightMarginOverride": "10px",
+    "windowingMode": "full"
+}
