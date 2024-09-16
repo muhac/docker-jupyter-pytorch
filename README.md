@@ -8,9 +8,11 @@ CUDA Docker environment is supported by [Ubuntu nvidia cuda toolkit](https://pac
 
 ## Available Tags
 
-Tag names convention: `CUDA_VERSION-torch_VERSION`. Full list are available on [muhac/conda-cuda | DockerHub](https://hub.docker.com/r/muhac/conda-cuda).
+Docker image tag name: `env001`.
 
-- `11.8-torch_2.1.1`: CUDA 11.8, Anaconda with PyTorch 2.1.1
+This image is built for the development environment of the
+[U of T ECE1786](https://www.eecg.utoronto.ca/~jayar/ece1786.2024/)
+course (Fall 2024) Assignment 1.
 
 ## Install & Usage
 
@@ -24,7 +26,7 @@ docker run --detach \
     --ipc=host --runtime=nvidia --gpus all \
     -p $SERVER_PORT:80 \
     -v $PROJECT_DIR:/root/projects \
-    muhac/conda-cuda:latest
+    muhac/conda-cuda:env001
 ```
 
 You can use [this notebook](JupyterLabConfig/notebooks/PyTorchGPU.ipynb) to check your PyTorch GPU environment.

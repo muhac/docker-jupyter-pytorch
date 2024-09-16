@@ -4,8 +4,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches:
-      - '**'
+    branches: ['env001-uoft_ece1786_a1']
 
 jobs:
   pytorch:
@@ -14,8 +13,6 @@ jobs:
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v4
-        with:
-          ref: 'main'
 
       - name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
@@ -44,7 +41,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          tags: muhac/conda-cuda:latest
+          tags: muhac/conda-cuda:env001
           push: true
 
       - name: Check Free Space Remaining

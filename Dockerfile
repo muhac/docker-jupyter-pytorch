@@ -49,7 +49,7 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     conda install -c pytorch -c nvidia -c conda-forge \
-        pytorch torchvision torchaudio pytorch-cuda=12.1 \
+        pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 torchtext==0.18.0 pytorch-cuda=12.1 \
         transformers && \
     conda clean -a && pip cache purge
 
@@ -58,4 +58,4 @@ WORKDIR /root/projects
 CMD ["/bin/bash", "-i", "/root/run_jupyter.sh"]
 EXPOSE 80
 
-HEALTHCHECK CMD wget -q --spider localhost
+HEALTHCHECK CMD  curl -f -s http://localhost/lab || exit 1
