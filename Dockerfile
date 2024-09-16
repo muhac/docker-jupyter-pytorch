@@ -1,5 +1,5 @@
 # Use CUDA 12.1
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -27,7 +27,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n torch python=3.11 anaconda ipywidgets -y && \
+    conda create -n torch python=3.8 anaconda ipywidgets -y && \
     echo "conda activate torch" >> /root/.bashrc && \
     conda clean -a && pip cache purge
 
@@ -49,8 +49,8 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     conda install -c pytorch -c nvidia -c conda-forge \
-        pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 torchtext==0.18.0 pytorch-cuda=12.1 \
-        transformers && \
+        pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 \
+        torchtext==0.12.0 spacy && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
