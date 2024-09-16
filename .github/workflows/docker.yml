@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - '**'
+  release:
+    types:
+      - published
 
 jobs:
   pytorch:
@@ -39,12 +42,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Determine Docker Tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" == "release" ]; then
+            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG=latest" >> $GITHUB_ENV
+          fi
+
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
-          tags: muhac/conda-cuda:latest
+          tags: muhac/conda-cuda:${{ env.TAG }}
           push: true
 
       - name: Check Free Space Remaining

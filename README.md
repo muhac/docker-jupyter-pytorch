@@ -8,9 +8,11 @@ CUDA Docker environment is supported by [Ubuntu nvidia cuda toolkit](https://pac
 
 ## Available Tags
 
-Tag names convention: `CUDA_VERSION-torch_VERSION`. Full list are available on [muhac/conda-cuda | DockerHub](https://hub.docker.com/r/muhac/conda-cuda).
+- `latest`: Most recent build directly from the latest `main` branch.
+- `v2.x.x`: JupyterLab installed with PyTorch GPU version `2.x.x`.
+- `env000`: Project environment snapshot, see branch README for details.
 
-- `11.8-torch_2.1.1`: CUDA 11.8, Anaconda with PyTorch 2.1.1
+Full list are available on [muhac/conda-cuda | DockerHub](https://hub.docker.com/r/muhac/conda-cuda).
 
 ## Install & Usage
 

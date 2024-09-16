@@ -35,7 +35,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     echo "jupyter lab" > /root/run_jupyter.sh && \
     conda install -c pytorch -c nvidia -c conda-forge \
-        jupyterlab-lsp python-lsp-server r-languageserver \
+        jupyterlab-lsp python-lsp-server r-languageserver texlab chktex \
         jupyterlab_code_formatter jupyterlab-spellchecker jupyterlab-git \
         jupyter-resource-usage jupyterlab_execute_time jupyterlab-latex && \
     pip install lckr_jupyterlab_variableinspector jupyterlab_wakatime && \
@@ -43,6 +43,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate t
 
 COPY JupyterLabConfig/jupyter_lab_config.py /root/.jupyter/jupyter_lab_config.py
 COPY JupyterLabConfig/extensions/ /root/.jupyter/lab/user-settings/\@jupyterlab/
+COPY JupyterLabConfig/jupyterlab-lsp/ /root/.jupyter/lab/user-settings/\@jupyter-lsp/jupyterlab-lsp/
 COPY JupyterLabConfig/notebooks/ /root/projects/demo_notebooks/
 COPY JupyterLabConfig/channels.condarc /root/.condarc
 
@@ -58,4 +59,5 @@ WORKDIR /root/projects
 CMD ["/bin/bash", "-i", "/root/run_jupyter.sh"]
 EXPOSE 80
 
-HEALTHCHECK CMD wget -q --spider localhost
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+CMD curl -f -s http://localhost:80/lab || exit 1
