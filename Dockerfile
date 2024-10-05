@@ -1,5 +1,5 @@
-# Use CUDA 12.1
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+# Use CUDA 12.4
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -50,7 +50,7 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     conda install -c pytorch -c nvidia -c conda-forge \
-        pytorch torchvision torchaudio pytorch-cuda=12.1 \
+        pytorch torchvision torchaudio pytorch-cuda=12.4 \
         transformers && \
     conda clean -a && pip cache purge
 
