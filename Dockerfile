@@ -1,4 +1,4 @@
-# Use CUDA 12.1
+# Use CUDA 11.3
 FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
@@ -43,6 +43,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate t
 
 COPY JupyterLabConfig/jupyter_lab_config.py /root/.jupyter/jupyter_lab_config.py
 COPY JupyterLabConfig/extensions/ /root/.jupyter/lab/user-settings/\@jupyterlab/
+COPY JupyterLabConfig/jupyterlab-lsp/ /root/.jupyter/lab/user-settings/\@jupyter-lsp/jupyterlab-lsp/
 COPY JupyterLabConfig/notebooks/ /root/projects/demo_notebooks/
 COPY JupyterLabConfig/channels.condarc /root/.condarc
 
@@ -51,6 +52,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate t
     conda install -c pytorch -c nvidia -c conda-forge \
         pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 \
         torchtext==0.12.0 spacy && \
+    pip install gradio && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
@@ -58,4 +60,4 @@ WORKDIR /root/projects
 CMD ["/bin/bash", "-i", "/root/run_jupyter.sh"]
 EXPOSE 80
 
-HEALTHCHECK CMD  curl -f -s http://localhost/lab || exit 1
+HEALTHCHECK CMD curl -f -s http://localhost/lab || exit 1

@@ -4,7 +4,7 @@ name: Publish Docker Image
 
 on:
   push:
-    branches: ['env001-uoft_ece1786_a1']
+    branches: ['env001-uoft_ece1786_a2']
 
 jobs:
   pytorch:
@@ -41,7 +41,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          tags: muhac/conda-cuda:env001
+          tags: muhac/conda-cuda:env002
           push: true
 
       - name: Check Free Space Remaining
