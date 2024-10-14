@@ -1,5 +1,3 @@
-# https://github.com/marketplace/actions/build-and-push-docker-images
-
 name: Publish Docker Image
 
 on:
@@ -17,8 +15,6 @@ jobs:
     steps:
       - name: Checkout the Repo
         uses: actions/checkout@v4
-        with:
-          ref: 'main'
 
       - name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
@@ -43,20 +39,27 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Determine Docker Tag
-        id: tag
         run: |
           if [ "${{ github.event_name }}" == "release" ]; then
-            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
-          else
-            echo "TAG=latest" >> $GITHUB_ENV
+            TAG=${{ github.event.release.tag_name }}
+          else # it's a branch
+            if [ "${{ github.ref_name }}" == "main" ]; then
+              TAG=latest
+            else
+              BRANCH_NAME="${{ github.ref_name }}"
+              TAG=$(echo "$BRANCH_NAME" | cut -d'-' -f1)
+            fi
           fi
+          TAG=$(echo $TAG | sed 's/[^a-zA-Z0-9.]/-/g' | tr '[:upper:]' '[:lower:]')
+          echo "Determined TAG: $TAG"
+          echo "TAG=$TAG" >> $GITHUB_ENV
 
       - name: Build and Push
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
-          tags: muhac/conda-cuda:${{ env.TAG }}
+          tags: muhac/jupyter-pytorch:${{ env.TAG }}
           push: true
 
       - name: Check Free Space Remaining
