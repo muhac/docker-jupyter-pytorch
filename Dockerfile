@@ -35,7 +35,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     echo "jupyter lab" > /root/run_jupyter.sh && \
     conda install -c pytorch -c nvidia -c conda-forge \
-        jupyterlab-lsp python-lsp-server r-languageserver \
+        jupyterlab-lsp python-lsp-server r-languageserver texlab chktex \
         jupyterlab_code_formatter jupyterlab-spellchecker jupyterlab-git \
         jupyter-resource-usage jupyterlab_execute_time jupyterlab-latex && \
     pip install lckr_jupyterlab_variableinspector jupyterlab_wakatime && \
