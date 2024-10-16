@@ -19,7 +19,7 @@ RUN apt-get update --fix-missing && \
     apt-get install pandoc texlive-xetex texlive-fonts-recommended texlive-plain-generic -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Miniconda
+# Install Conda Environment
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/anaconda.sh && \
     bash ~/anaconda.sh -b -p $HOME/anaconda && rm ~/anaconda.sh && \
     eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda init && \
@@ -27,31 +27,37 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n torch python=3.11 anaconda ipywidgets -y && \
+    conda create -n torch python=3.11 anaconda ipywidgets nodejs -y && \
     echo "conda activate torch" >> /root/.bashrc && \
     conda clean -a && pip cache purge
 
 # Setup JupyterLab plugins
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
-    echo "jupyter lab" > /root/run_jupyter.sh && \
-    conda install -c pytorch -c nvidia -c conda-forge \
+    conda install -c conda-forge \
         jupyterlab-lsp python-lsp-server r-languageserver texlab chktex \
         jupyterlab_code_formatter jupyterlab-spellchecker jupyterlab-git \
         jupyter-resource-usage jupyterlab_execute_time jupyterlab-latex && \
     pip install lckr_jupyterlab_variableinspector jupyterlab_wakatime && \
-    conda clean -a && pip cache purge
+    npm set prefix /root && npm install -g --save-dev remark-language-server \
+        remark-preset-lint-consistent remark-preset-lint-recommended && \
+    conda clean -a && pip cache purge && npm cache clean --force && \
+    echo "jupyter lab" > /root/run_jupyter.sh
 
 COPY JupyterLabConfig/jupyter_lab_config.py /root/.jupyter/jupyter_lab_config.py
 COPY JupyterLabConfig/extensions/ /root/.jupyter/lab/user-settings/\@jupyterlab/
 COPY JupyterLabConfig/jupyterlab-lsp/ /root/.jupyter/lab/user-settings/\@jupyter-lsp/jupyterlab-lsp/
+COPY JupyterLabConfig/jupyterlab-lsp/unified_language_server.py /root/anaconda/envs/torch/lib/python3.11/site-packages/jupyter_lsp/specs/unified_language_server.py
+COPY JupyterLabConfig/jupyterlab-lsp/remarkrc.yml /root/.remarkrc.yml
 COPY JupyterLabConfig/notebooks/ /root/projects/demo_notebooks/
 COPY JupyterLabConfig/channels.condarc /root/.condarc
 
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
-    conda install -c pytorch -c nvidia -c conda-forge \
+    conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
         pytorch torchvision torchaudio pytorch-cuda=12.4 \
-        transformers && \
+        xgboost spacy transformers \
+        django beautifulsoup4 && \
+    pip install opencv-python && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
