@@ -49,9 +49,9 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
-    conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
-        pytorch torchvision torchaudio pytorch-cuda=12.4 \
-        transformers datasets evaluate && \
+    conda install -c pytorch -c nvidia \
+        pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4 && \
+    pip install transformers datasets evaluate accelerate && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
