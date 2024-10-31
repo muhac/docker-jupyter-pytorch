@@ -57,7 +57,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate t
         pytorch torchvision torchaudio pytorch-cuda=12.4 \
         xgboost spacy transformers \
         django beautifulsoup4 && \
-    pip install opencv-python && \
+    pip install opencv-python treelib && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
