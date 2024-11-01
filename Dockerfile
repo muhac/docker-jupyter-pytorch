@@ -41,6 +41,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate t
     npm set prefix /root && npm install -g --save-dev remark-language-server \
         remark-preset-lint-consistent remark-preset-lint-recommended && \
     conda clean -a && pip cache purge && npm cache clean --force && \
+    jupyter labextension disable "@jupyterlab/apputils-extension:announcements" && \
     echo "jupyter lab" > /root/run_jupyter.sh
 
 COPY JupyterLabConfig/jupyter_lab_config.py /root/.jupyter/jupyter_lab_config.py
@@ -55,7 +56,7 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
         pytorch torchvision torchaudio pytorch-cuda=12.4 \
-        xgboost spacy transformers \
+        transformers datasets spacy xgboost \
         django beautifulsoup4 && \
     pip install opencv-python && \
     conda clean -a && pip cache purge
