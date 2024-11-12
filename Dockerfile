@@ -1,5 +1,5 @@
 # Use CUDA 12.4
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -56,7 +56,7 @@ COPY requirements.txt requirements.txt
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
-        pytorch torchvision torchaudio pytorch-cuda=12.4 && \
+        pytorch torchvision torchaudio pytorch-cuda=11.8 && \
     pip install -r requirements.txt && \
     conda clean -a && pip cache purge
 

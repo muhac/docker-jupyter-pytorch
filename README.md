@@ -2,7 +2,7 @@
 
 JupyterLab for AI in Docker! `conda` installed. By default, the JupyterLab server runs on an Anaconda environment with PyTorch and some other commonly used libraries installed.
 
-This docker configuration is Ubuntu 22.04 LTS, CUDA version 12.4, cuDNN 9. You may change the base system and the CUDA version listed here: [nvidia/cuda | DockerHub](https://hub.docker.com/r/nvidia/cuda/tags?page=1).
+This docker configuration is Ubuntu 22.04 LTS, CUDA version 11.8, cuDNN 8. You may change the base system and the CUDA version listed here: [nvidia/cuda | DockerHub](https://hub.docker.com/r/nvidia/cuda/tags?page=1).
 
 CUDA Docker environment is supported by [Ubuntu nvidia cuda toolkit](https://packages.ubuntu.com/jammy/amd64/nvidia-cuda-toolkit). Instruction: [CUDA and cuDNN Install | Pop!_OS](https://support.system76.com/articles/cuda/). It should work on Windows as well, with WSL.
 
