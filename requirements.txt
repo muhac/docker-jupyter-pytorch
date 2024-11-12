@@ -11,11 +11,8 @@ anyio==4.6.2.post1
 appdirs==1.4.4
 asgiref==3.5.0
 async-timeout==4.0.3
-attrs==21.2.0
 Automat==20.2.0
-Babel==2.8.0
 bcrypt==3.2.0
-black==21.4b2
 blinker==1.4
 blobfile==3.0.0
 braceexpand==0.1.7
@@ -64,7 +61,6 @@ Jinja2==3.1.4
 joblib==1.4.2
 jsonpatch==1.32
 jsonpointer==2.0
-jsonschema==3.2.0
 keyring==23.5.0
 kiwisolver==1.4.7
 kornia==0.7.3
@@ -114,7 +110,7 @@ pandas==2.2.3
 panopticapi @ git+https://github.com/cocodataset/panopticapi.git@7bb4655548f98f3fedc07bf37e9040a992b054b0
 pathspec==0.12.1
 pexpect==4.8.0
-pillow==11.0.0
+pillow==9.1.0
 portalocker==2.10.1
 propcache==0.2.0
 protobuf==5.28.3
@@ -129,7 +125,6 @@ pydot==3.0.2
 pydub==0.25.1
 Pygments==2.18.0
 PyHamcrest==2.0.2
-PyJWT==2.3.0
 pyOpenSSL==21.0.0
 pyparsing==3.2.0
 pyrsistent==0.18.1
@@ -148,7 +143,7 @@ safehttpx==0.1.1
 safetensors==0.4.5
 scikit-image==0.24.0
 scikit-learn==1.5.2
-scipy==1.14.1
+scipy==1.14.0
 SecretStorage==3.3.1
 semantic-version==2.10.0
 service-identity==18.1.0
