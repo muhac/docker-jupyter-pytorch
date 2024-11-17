@@ -1,5 +1,4 @@
-# Use CUDA 12.4
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM ubuntu:22.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -27,7 +26,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n torch python=3.11 anaconda ipywidgets nodejs -y && \
+    conda create -n torch python=3.12 anaconda ipywidgets nodejs -y && \
     echo "conda activate torch" >> /root/.bashrc && \
     conda clean -a && pip cache purge
 
@@ -55,10 +54,8 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
     conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
-        pytorch torchvision torchaudio pytorch-cuda=12.4 \
-        transformers datasets spacy xgboost \
-        django beautifulsoup4 && \
-    pip install opencv-python && \
+        pytorch torchvision torchaudio pytorch-cuda=12.4 && \
+    pip install openai==0.28 jsonlines && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start

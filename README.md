@@ -8,11 +8,11 @@ CUDA Docker environment is supported by [Ubuntu nvidia cuda toolkit](https://pac
 
 ## Available Tags
 
-- `latest`: Most recent build directly from the latest `main` branch.
-- `v2.x.x`: JupyterLab installed with PyTorch GPU version `2.x.x`.
-- Branch names: Snapshots of the project environment; refer to the branch README for more information.
+Docker image tag name: `env-2411b`.
 
-Full list are available on [muhac/jupyter-pytorch | DockerHub](https://hub.docker.com/r/muhac/jupyter-pytorch).
+This image is built for the development environment of the [U of T MAT1510](https://sites.google.com/view/mat1510) course (Fall 2024).
+
+Project: [Towards Understanding Chain-of-Thought Prompting](https://github.com/muhac/understanding-chain-of-thought)
 
 ## Install & Usage
 
@@ -26,7 +26,7 @@ docker run --detach \
     --ipc=host --runtime=nvidia --gpus all \
     -p $SERVER_PORT:80 \
     -v $PROJECT_DIR:/root/projects \
-    muhac/jupyter-pytorch:latest
+    muhac/jupyter-pytorch:env-2411b
 ```
 
 You can use [this notebook](JupyterLabConfig/notebooks/PyTorchGPU.ipynb) to check your PyTorch GPU environment.
