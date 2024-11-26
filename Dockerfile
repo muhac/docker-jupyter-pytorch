@@ -27,7 +27,7 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n torch python=3.11 anaconda ipywidgets nodejs -y && \
+    conda create -n torch python=3.12 anaconda ipywidgets nodejs -y && \
     echo "conda activate torch" >> /root/.bashrc && \
     conda clean -a && pip cache purge
 
