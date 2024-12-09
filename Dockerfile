@@ -53,7 +53,7 @@ COPY JupyterLabConfig/channels.condarc /root/.condarc
 
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
-    pip install pypdf arxiv openai && \
+    pip install pypdf arxiv openai tiktoken pymupdf4llm && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
