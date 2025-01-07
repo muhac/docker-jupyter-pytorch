@@ -27,12 +27,12 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n torch python=3.12 anaconda ipywidgets nodejs -y && \
-    echo "conda activate torch" >> /root/.bashrc && \
+    conda create -n lab python=3.12 anaconda ipywidgets nodejs -y && \
+    echo "conda activate lab" >> /root/.bashrc && \
     conda clean -a && pip cache purge
 
 # Setup JupyterLab plugins
-RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
+RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
     conda install -c conda-forge \
         jupyterlab-lsp python-lsp-server r-languageserver texlab chktex \
         jupyterlab_code_formatter jupyterlab-spellchecker jupyterlab-git \
@@ -47,13 +47,13 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate t
 COPY JupyterLabConfig/jupyter_lab_config.py /root/.jupyter/jupyter_lab_config.py
 COPY JupyterLabConfig/extensions/ /root/.jupyter/lab/user-settings/\@jupyterlab/
 COPY JupyterLabConfig/jupyterlab-lsp/ /root/.jupyter/lab/user-settings/\@jupyter-lsp/jupyterlab-lsp/
-COPY JupyterLabConfig/jupyterlab-lsp/unified_language_server.py /root/anaconda/envs/torch/lib/python3.11/site-packages/jupyter_lsp/specs/unified_language_server.py
+COPY JupyterLabConfig/jupyterlab-lsp/unified_language_server.py /root/anaconda/envs/lab/lib/python3.12/site-packages/jupyter_lsp/specs/unified_language_server.py
 COPY JupyterLabConfig/jupyterlab-lsp/remarkrc.yml /root/.remarkrc.yml
 COPY JupyterLabConfig/notebooks/ /root/projects/demo_notebooks/
 COPY JupyterLabConfig/channels.condarc /root/.condarc
 
 # Install PyTorch and AI libs
-RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate torch && \
+RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
     conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
         pytorch torchvision torchaudio pytorch-cuda=12.4 \
         transformers datasets spacy xgboost \
