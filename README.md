@@ -1,16 +1,12 @@
 # JupyterLab Docker Image with PyTorch GPU
 
-JupyterLab for AI in Docker! `conda` installed. By default, the JupyterLab server runs on an Anaconda environment with PyTorch and some other commonly used libraries installed.
-
-This docker configuration is Ubuntu 22.04 LTS, CUDA version 12.4, cuDNN 9. You may change the base system and the CUDA version listed here: [nvidia/cuda | DockerHub](https://hub.docker.com/r/nvidia/cuda/tags?page=1).
-
-CUDA Docker environment is supported by [Ubuntu nvidia cuda toolkit](https://packages.ubuntu.com/jammy/amd64/nvidia-cuda-toolkit). Instruction: [CUDA and cuDNN Install | Pop!_OS](https://support.system76.com/articles/cuda/). It should work on Windows as well, with WSL.
+JupyterLab in Docker! `conda` installed. This docker image runs on Ubuntu 24.04 LTS, with Python 3.13.1.
 
 ## Available Tags
 
-- `latest`: Most recent build directly from the latest `main` branch.
-- `v2.x.x`: JupyterLab installed with PyTorch GPU version `2.x.x`.
-- Branch names: Snapshots of the project environment; refer to the branch README for more information.
+Docker image tag name: `env-2501a`.
+
+This image is built for the development environment of the [U of T CSC108](https://artsci.calendar.utoronto.ca/course/csc108h1) course (Winter 2025).
 
 Full list are available on [muhac/jupyter-pytorch | DockerHub](https://hub.docker.com/r/muhac/jupyter-pytorch).
 
@@ -26,9 +22,7 @@ docker run --detach \
     --ipc=host --runtime=nvidia --gpus all \
     -p $SERVER_PORT:80 \
     -v $PROJECT_DIR:/root/projects \
-    muhac/jupyter-pytorch:latest
+    muhac/jupyter-pytorch:env-2501a
 ```
-
-You can use [this notebook](JupyterLabConfig/notebooks/PyTorchGPU.ipynb) to check your PyTorch GPU environment.
 
 It is also possible to create your own conda environment and change `/root/.bashrc` to use a different one when starting JupyterLab. If you want to do this, make sure you keep all related files synced in the host system to prevent loss after pulling a new image.
