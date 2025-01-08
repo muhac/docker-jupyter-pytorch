@@ -1,0 +1,69 @@
+format = """
+$username$hostname $directory $git_status\
+$fill\
+$cmd_duration $time $conda $python
+$os$character"""
+
+[fill]
+symbol = " "
+
+[package]
+disabled = true
+
+[git_status]
+disabled = true
+
+[username]
+format = '[$user]($style)'
+
+[hostname]
+format = '[ $ssh_symbol$hostname]($style)'
+ssh_symbol = '@ '
+style = '7'
+
+[time]
+disabled = false
+format = '[$time]($style)'
+time_format = '%T%:::z'
+style = '7'
+
+[cmd_duration]
+format = '[\($duration\)]($style) '
+style = 'bold cyan'
+
+[os]
+disabled = false
+[os.symbols]
+Debian = "deb "
+Ubuntu = "ubt "
+Macos = "mac "
+Windows = "win "
+
+[python]
+style = '5'
+format = '[(${version})]($style)'
+version_format = '${raw}'
+
+[conda]
+format = '[$environment]($style)'
+
+# No Nerd Fonts Preset
+
+[battery]
+full_symbol = "• "
+charging_symbol = "⇡ "
+discharging_symbol = "⇣ "
+unknown_symbol = "❓ "
+empty_symbol = "❗ "
+
+[erlang]
+symbol = "ⓔ "
+
+[nodejs]
+symbol = "[⬢](bold green) "
+
+[pulumi]
+symbol = "🧊 "
+
+[typst]
+symbol = "t "

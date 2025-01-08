@@ -11,6 +11,7 @@ RUN echo $'\n\
     export CPATH=/usr/local/cuda/include:/usr/include:$CPATH \n\
     export LIBRARY_PATH=/usr/local/cuda/lib64:$LIBRARY_PATH \n\
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH \n\
+    eval "$(starship init bash)" \n\
 ' >> /root/.bashrc
 
 # Install basic packages
@@ -33,7 +34,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
 
 # Setup JupyterLab plugins
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
-    conda install -c conda-forge \
+    conda install -c conda-forge starship \
         jupyterlab-lsp python-lsp-server r-languageserver texlab chktex \
         jupyterlab_code_formatter jupyterlab-spellchecker jupyterlab-git \
         jupyter-resource-usage jupyterlab_execute_time jupyterlab-latex && \
@@ -51,6 +52,7 @@ COPY JupyterLabConfig/jupyterlab-lsp/unified_language_server.py /root/anaconda/e
 COPY JupyterLabConfig/jupyterlab-lsp/remarkrc.yml /root/.remarkrc.yml
 COPY JupyterLabConfig/notebooks/ /root/projects/demo_notebooks/
 COPY JupyterLabConfig/channels.condarc /root/.condarc
+COPY JupyterLabConfig/starship.toml /root/.config/starship.toml
 
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
