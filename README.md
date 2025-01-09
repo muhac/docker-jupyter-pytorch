@@ -19,12 +19,17 @@ Full list are available on [muhac/jupyter-pytorch | DockerHub](https://hub.docke
 The image automatically runs a JupyterLab server on port `80`. Working directory in the container: `/root/projects`.
 
 ```bash
-PROJECT_DIR=./
-SERVER_PORT=80
-docker run --detach \
-    --name jupyter --restart unless-stopped \
-    --ipc=host --runtime=nvidia --gpus all \
-    -p $SERVER_PORT:80 \
+SERVER_PORT=${SERVER_PORT:-80}
+PROJECT_DIR=${PROJECT_DIR:-$(pwd)}
+TIME_ZONE=${TIME_ZONE:-America/Toronto}
+
+docker run -d                      \
+    --name jupyter-pytorch         \
+    --restart unless-stopped       \
+    --ipc=host                     \
+    --gpus all                     \
+    --env TZ=$TIME_ZONE            \
+    -p $SERVER_PORT:80             \
     -v $PROJECT_DIR:/root/projects \
     muhac/jupyter-pytorch:latest
 ```
