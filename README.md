@@ -4,9 +4,7 @@ JupyterLab in Docker! `conda` installed. This docker image runs on Ubuntu 24.04 
 
 ## Available Tags
 
-Docker image tag name: `env-2501a`.
-
-This image is built for the development environment of the [U of T CSC108](https://artsci.calendar.utoronto.ca/course/csc108h1) course (Winter 2025).
+Docker image tag name: `env-2501b`.
 
 Full list are available on [muhac/jupyter-pytorch | DockerHub](https://hub.docker.com/r/muhac/jupyter-pytorch).
 

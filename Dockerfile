@@ -56,7 +56,7 @@ COPY JupyterLabConfig/starship.toml /root/.config/starship.toml
 # Install libraries
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
     conda install -c conda-forge requests && \
-    pip install openai && \
+    pip install arxiv rapidfuzz && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
