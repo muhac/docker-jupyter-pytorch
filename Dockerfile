@@ -28,17 +28,19 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
-    conda create -n lab python=3.12 anaconda ipywidgets nodejs -y && \
+    conda create -n lab python=3.12 anaconda nodejs -y && \
     echo "conda activate lab" >> /root/.bashrc && \
     conda clean -a && pip cache purge
 
 # Setup JupyterLab plugins
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
     conda install -c conda-forge starship \
-        jupyterlab-lsp python-lsp-server r-languageserver texlab chktex \
-        jupyterlab_code_formatter jupyterlab-spellchecker jupyterlab-git \
-        jupyter-resource-usage jupyterlab_execute_time jupyterlab-latex && \
-    pip install lckr_jupyterlab_variableinspector jupyterlab_wakatime && \
+        jupyterlab-lsp python-lsp-server r-languageserver \
+        jupyterlab_code_formatter jupyterlab-spellchecker \
+        jupyter-resource-usage jupyterlab_execute_time \
+        jupyterlab-latex texlab chktex jupyterlab-git && \
+    pip install "ipywidgets>=8.0" jupyterlab_wakatime \
+        lckr_jupyterlab_variableinspector && \
     npm set prefix /root && npm install -g --save-dev remark-language-server \
         remark-preset-lint-consistent remark-preset-lint-recommended && \
     conda clean -a && pip cache purge && npm cache clean --force && \
@@ -60,7 +62,7 @@ RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate l
         pytorch torchvision torchaudio pytorch-cuda=12.4 \
         transformers datasets spacy xgboost \
         django beautifulsoup4 && \
-    pip install opencv-python && \
+    pip install accelerate>=0.26.0 && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
