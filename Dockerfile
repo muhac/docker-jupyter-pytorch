@@ -23,8 +23,7 @@ RUN apt-get update --fix-missing && \
 # Install Conda Environment
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/anaconda.sh && \
     bash ~/anaconda.sh -b -p $HOME/anaconda && rm ~/anaconda.sh && \
-    eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda init && \
-    conda config --set channel_priority strict
+    eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda init
 
 # Install Anaconda and JupyterLab
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && \
@@ -53,15 +52,12 @@ COPY JupyterLabConfig/jupyterlab-lsp/ /root/.jupyter/lab/user-settings/\@jupyter
 COPY JupyterLabConfig/jupyterlab-lsp/unified_language_server.py /root/anaconda/envs/lab/lib/python3.12/site-packages/jupyter_lsp/specs/unified_language_server.py
 COPY JupyterLabConfig/jupyterlab-lsp/remarkrc.yml /root/.remarkrc.yml
 COPY JupyterLabConfig/notebooks/ /root/projects/demo_notebooks/
-COPY JupyterLabConfig/channels.condarc /root/.condarc
 COPY JupyterLabConfig/starship.toml /root/.config/starship.toml
 
 # Install PyTorch and AI libs
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
-    conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
-        pytorch torchvision torchaudio pytorch-cuda=12.4 \
-        transformers datasets accelerate spacy xgboost \
-        django beautifulsoup4 && \
+    pip install torch torchvision torchaudio transformers datasets accelerate peft && \
+    conda install -c conda-forge spacy xgboost django beautifulsoup4 && \
     pip install opencv-python && \
     conda clean -a && pip cache purge
 
