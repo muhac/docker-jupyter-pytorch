@@ -1,15 +1,7 @@
-# Use CUDA 12.4
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM ubuntu:24.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
-
-# Export paths for CUDA and cuDNN
-ENV CUDA_HOME=/usr/local/cuda
-ENV PATH="/usr/local/cuda/bin:$PATH"
-ENV CPATH="/usr/local/cuda/include:/usr/include:$CPATH"
-ENV LIBRARY_PATH="/usr/local/cuda/lib64:$LIBRARY_PATH"
-ENV LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH"
 
 RUN echo 'command -v nvcc &>/dev/null && nvcc -V || uname -srm' >> /root/.bashrc && \
     echo 'eval "$(starship init bash)"' >> /root/.bashrc
