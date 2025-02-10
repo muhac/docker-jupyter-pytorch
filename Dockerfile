@@ -1,5 +1,4 @@
-# Use CUDA 12.4
-FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu22.04
+FROM ubuntu:24.04
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -60,9 +59,8 @@ COPY JupyterLabConfig/starship.toml /root/.config/starship.toml
 RUN eval "$('/root/anaconda/bin/conda' 'shell.bash' 'hook')" && conda activate lab && \
     conda install -c pytorch -c nvidia -c conda-forge --strict-channel-priority \
         pytorch torchvision torchaudio pytorch-cuda=12.4 \
-        transformers datasets accelerate spacy xgboost \
-        django beautifulsoup4 && \
-    pip install opencv-python && \
+        transformers datasets accelerate && \
+    pip install openai sentencepiece && \
     conda clean -a && pip cache purge
 
 # Run JupyterLab on start
